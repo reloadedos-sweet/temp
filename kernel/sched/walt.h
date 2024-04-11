@@ -21,19 +21,11 @@
 
 #define MAX_NR_CLUSTERS			3
 
-#ifdef CONFIG_HZ_300
-/*
- * Tick interval becomes to 3333333 due to
- * rounding error when HZ=300.
- */
-#define DEFAULT_SCHED_RAVG_WINDOW (3333333 * 6)
-#else
-/* Default window size (in ns) = 20ms */
-#define DEFAULT_SCHED_RAVG_WINDOW 20000000
-#endif
+/* Default window size (in ns) = 10ms */
+#define DEFAULT_SCHED_RAVG_WINDOW ((10000000 / TICK_NSEC) * TICK_NSEC)
 
 /* Max window size (in ns) = 1s */
-#define MAX_SCHED_RAVG_WINDOW 1000000000
+#define MAX_SCHED_RAVG_WINDOW ((1000000000 / TICK_NSEC) * TICK_NSEC)
 #define NR_WINDOWS_PER_SEC (NSEC_PER_SEC / DEFAULT_SCHED_RAVG_WINDOW)
 
 #define WINDOW_STATS_RECENT		0
